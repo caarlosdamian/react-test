@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+const { render, waitFor ,screen} = require("@testing-library/react");
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Breaking bad app", () => {
+  it("Should render characters names", async () => {
+    render(<App />);
+    await waitFor(()=>{
+      screen.getByText("Skyler White")
+    })
+  });
 });

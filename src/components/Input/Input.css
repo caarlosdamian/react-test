@@ -1,0 +1,15 @@
+.input-search {
+  padding: 20px 20px 10px 20px;
+  width: 20rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  margin: 20px auto 20px auto;
+  outline: none;
+  font-size: 20px;
+  color: black;
+}
+.input-search::placeholder {
+  font-size: 20px;
+  color: black;
+}
