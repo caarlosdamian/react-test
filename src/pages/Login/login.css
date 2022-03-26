@@ -1,0 +1,35 @@
+.loginContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.inputContainer{
+    display: flex;
+    margin-bottom: 5px;
+    flex-direction: column;
+}
+input{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 250px;
+}
+label{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+button{
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightseagreen;
+    color: white;
+    cursor: pointer;
+    width: 250px;
+    margin-top: 15px;
+}
+button:hover{
+  background-color:rgba(32, 178, 171, 0.527) ;
+}

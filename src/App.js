@@ -1,45 +1,57 @@
 import "./App.css";
-import { useEffect, useRef, useState } from "react";
-import { Input } from "./components/Input/Input";
-import { MiniCard } from "./components/MiniCard/MiniCard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home/Home";
+import { User } from "./pages/users/User";
+import NotFound from "./pages/Not Found/NotFound";
+import { Login } from "./pages/Login/Login";
+import { SingleUser } from "./pages/SingleUser/SingleUser";
+import { PrivateRoute } from "./routes/PrivateRoute";
 
 function App() {
-  const [character, setCharacter] = useState([]);
-  const [filtro, setfiltro] = useState("");
-
-  const datosFiltrados = character.filter((item) =>
-    item.name.toLowerCase().includes(filtro)
-  );
-  useEffect(() => {
-    const fetchHarry = async () => {
-      const response = await fetch("https://www.breakingbadapi.com/api/characters/");
-      const data = await response.json();
-      setCharacter(data);
-    };
-    fetchHarry();
-  }, []);
-
-  const handleFilter = (e) => {
-    setfiltro(e.target.value);
-  };
+ 
   return (
-    <div className="App">
-        <Input
-          onChange={handleFilter}
-          placeholder="Buscar..."
-          className="input-search"
+    <Router>
+      <Routes>
+        <Route
+          path="/prueba/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
         />
-        <div className="grid-container">
-          {datosFiltrados?.map((item, i) => (
-            <MiniCard  item={item}/>
-          ))}
-        </div>
-
-          <div className="container">
-
-          </div>
-        
-    </div>
+        <Route path="/">
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <Home/>
+              </PrivateRoute>
+            }
+          />
+          <Route path="login" element={<Login />} />
+        </Route>
+        <Route path="/users">
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <User />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path=":userId"
+            element={
+              <PrivateRoute>
+                <SingleUser />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
